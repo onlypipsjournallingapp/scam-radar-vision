@@ -1,7 +1,7 @@
-
 import { useState } from 'react';
 import { Scammer } from '../data/scammers';
 import { ExternalLink, Video } from 'lucide-react';
+import RiskBadge from './RiskBadge';
 
 interface ScammerCardProps {
   scammer: Scammer;
@@ -11,15 +11,11 @@ interface ScammerCardProps {
 const ScammerCard = ({ scammer, onClick }: ScammerCardProps) => {
   const [isHovering, setIsHovering] = useState(false);
 
-  // Determine badge class based on scam level
-  const badgeClass = 
-    scammer.scamLevel === 'high' ? 'badge-high' :
-    scammer.scamLevel === 'medium' ? 'badge-medium' : 'badge-low';
-  
-  // Format scam level for display
-  const scamLevelDisplay = 
-    scammer.scamLevel === 'high' ? 'High Risk' :
-    scammer.scamLevel === 'medium' ? 'Medium Risk' : 'Low Risk';
+  // Convert scamLevel to RiskBadge level
+  const riskLevel = 
+    scammer.scamLevel === 'high' ? 'extreme' :
+    scammer.scamLevel === 'medium' ? 'high' :
+    'moderate';
 
   return (
     <div 
@@ -38,12 +34,12 @@ const ScammerCard = ({ scammer, onClick }: ScammerCardProps) => {
             <div className="relative">
               <img 
                 src={scammer.avatar} 
-                alt={scammer.name} 
-                className="w-16 h-16 rounded-full object-cover border-2 border-white/10"
+                alt={scammer.name}
+                className="w-16 h-16 rounded-full object-cover border-2 border-white/10" 
               />
-              <span className={`${badgeClass} absolute -bottom-1 -right-1`}>
-                {scamLevelDisplay}
-              </span>
+              <div className="absolute -bottom-1 -right-1">
+                <RiskBadge level={riskLevel} />
+              </div>
             </div>
             <div className="ml-4">
               <h3 className="text-xl font-bold">{scammer.name}</h3>
