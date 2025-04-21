@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Scammer } from '../data/scammers';
 import { ExternalLink, Video } from 'lucide-react';
@@ -30,28 +31,11 @@ const ScammerCard = ({ scammer, onClick }: ScammerCardProps) => {
       
       <div className="p-6">
         <div className="flex items-start justify-between mb-4">
-          <div className="flex items-center">
-            <div className="relative">
-              <img 
-                src={scammer.avatar} 
-                alt={scammer.name}
-                className="w-16 h-16 rounded-full object-cover border-2 border-white/10" 
-              />
-              <div className="absolute -bottom-1 -right-1">
+          <div className="flex items-center w-full">
+            <div className="flex-grow flex items-center">
+              <div className="flex items-center space-x-3">
                 <RiskBadge level={riskLevel} />
-              </div>
-            </div>
-            <div className="ml-4">
-              <h3 className="text-xl font-bold">{scammer.name}</h3>
-              <div className="flex flex-wrap gap-2 mt-1">
-                {scammer.tags.map((tag, index) => (
-                  <span 
-                    key={index} 
-                    className="text-xs bg-secondary/20 text-secondary-foreground px-2 py-0.5 rounded"
-                  >
-                    {tag}
-                  </span>
-                ))}
+                <h3 className="text-xl font-bold">{scammer.name}</h3>
               </div>
             </div>
           </div>
